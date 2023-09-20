@@ -1,0 +1,72 @@
+<div>
+  <app-top-navbar [title]="title"></app-top-navbar>
+</div>
+
+<main>
+  <div class="m-3">
+    <div class="bg-white p-3 rounded">
+      <div>
+        <h1 class="fs-3 fw-bold mt-1">Search Flights</h1>
+        <form autocomplete="off">
+          <div>
+            <div>
+              <p class="fs-2 fw-bold">Type of flight chart</p>
+              <div class="my-3 mx-4">
+                <ion-radio-group value="flightView">
+                  <ion-radio labelPlacement="end" class="mb-3" value="flightView"
+                    >Flight view</ion-radio
+                  >
+                  <br />
+                  <ion-radio labelPlacement="end" value="flightSegment"
+                    >Flight segment view
+                  </ion-radio>
+                </ion-radio-group>
+              </div>
+            </div>
+            <div class="d-flex align-items-center justify-content-between">
+              <p class="fs-2 me-2 text-nowrap">Departure Date:</p>
+              <app-datepicker
+                [showfield]="'departureDate'"
+                [departureDate]="departureDate"
+                (datePic)="selectDate($event)"
+              ></app-datepicker>
+            </div>
+            <ion-input
+              type="search"
+              class="fs-2 mb-1"
+              label="Origin"
+              autocomplete="off"
+              label-placement="floating"
+              fill="outline"
+              (ionInput)="handleInput($event)"
+              [value]="originVal"
+            ></ion-input>
+            <app-dropdown
+              [flightData]="flightData"
+              (dropDownEmit)="selectDropDown($event)"
+              [isOriginList]="isOriginList"
+            ></app-dropdown>
+            <ion-input
+              type="search"
+              class="fs-2 mb-1"
+              label="Destination"
+              autocomplete="off"
+              label-placement="floating"
+              fill="outline"
+              (ionInput)="handleInput($event)"
+              [value]="destinationVal"
+            ></ion-input>
+            <app-dropdown
+              [flightData]="flightData"
+              [isDestiniList]="isDestiniList"
+              (dropDownEmit)="selectDropDown($event)"
+            ></app-dropdown>
+            <div class="d-flex justify-content-between align-items-center mt-3">
+              <button class="fs-2 btn" type="submit" (click)="onLoadFlight()">Search Fligths</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>

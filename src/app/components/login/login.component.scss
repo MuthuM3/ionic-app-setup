@@ -1,0 +1,48 @@
+.lod00 {
+  background-image: url(https://qo-test.proverne.com/cargo/assets/images/backgrounds/dark-material-bg.jpg);
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lod01 {
+  min-width: 300px;
+  width: 90%;
+  max-width: 400px;
+  background-color: white;
+  border-radius: 6px;
+}
+
+.lobtn01 {
+  width: 40%;
+}
+
+.lopd00 {
+  background-color: #e0effd;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.lopd01 {
+  background-color: white;
+  margin: 1rem;
+  border-radius: 6px;
+}
+
+.lobtn02 {
+  width: 210px;
+}
+
+.logo-img{
+  width: 64px;
+  height: auto;
+}
+
+.awb-block{
+  color: grey;
+  cursor: auto;
+  text-decoration: line-through;
+}
+

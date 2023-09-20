@@ -1,0 +1,60 @@
+<div *ngIf="showfield === 'issueDateFrom'">
+  <ion-modal [keepContentsMounted]="true">
+    <ng-template>
+      <ion-datetime
+        (ionChange)="dateChanged($event)"
+        id="datetime1"
+        [showDefaultButtons]="true"
+        [value]="issueDateFrom"
+        presentation="date"
+      >
+      </ion-datetime>
+    </ng-template>
+  </ion-modal>
+  <ion-datetime-button
+    class="w-100"
+    datetime="datetime1"
+    color="primary"
+  ></ion-datetime-button>
+</div>
+
+<div *ngIf="showfield === 'issueDateTo'">
+  <ion-modal [keepContentsMounted]="true">
+    <ng-template>
+      <ion-datetime
+        (ionChange)="dateChanged($event)"
+        id="datetime2"
+        [showDefaultButtons]="true"
+        [value]="issueDateTo"
+        presentation="date"
+      >
+      </ion-datetime>
+    </ng-template>
+  </ion-modal>
+  <ion-datetime-button
+    class="w-100"
+    datetime="datetime2"
+    color="primary"
+  ></ion-datetime-button>
+</div>
+
+<div *ngIf="showfield === 'departureDate'">
+  <ion-modal [keepContentsMounted]="true">
+    <ng-template>
+      <ion-datetime
+        (ionChange)="dateChanged($event)"
+        id="datetime3"
+        [showDefaultButtons]="true"
+        [showDefaultTitle]="true"
+        presentation="date"
+      >
+        <span slot="title">select departure date</span>
+      </ion-datetime>
+    </ng-template>
+  </ion-modal>
+  <ion-datetime-button
+    class="w-100"
+    datetime="datetime3"
+    color="primary"
+  ></ion-datetime-button>
+</div>

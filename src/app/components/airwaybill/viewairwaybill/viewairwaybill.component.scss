@@ -1,0 +1,31 @@
+
+.datePic {
+    width: 100%;
+    padding: 8px 1rem;
+    outline-width: 1px;
+}
+
+.dateField {
+    display: block;
+}
+
+.dateField>.ion-activatable {
+    width: 100%;
+    padding: 8px 1rem;
+    border: 1px solid;
+    background-color: white;
+    border-radius: 3px;
+    text-align: start;
+}
+
+.sl01 {
+    position: absolute;
+    width: 100%;
+    box-shadow: 0px 0px 2px 1px #0000008a;
+    z-index: 4;
+    min-height: auto;
+    max-height: 150px;
+    overflow-y: scroll;
+}
+
+

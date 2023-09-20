@@ -1,0 +1,179 @@
+<main>
+  <div class="lod00" *ngIf="isLogin">
+    <div class="lod01 p-4">
+      <div class="text-center mb-4">
+        <img class="logo-img" src="./assets/proverne_logo.png" alt="login"/>
+        <p *ngIf="!isAirline" class="fs-3 mt-3">CHOOSE YOUR AIRLINE</p>
+        <p *ngIf="isAirline" class="fs-3 mt-3">LOGIN TO YOUR ACCOUNT</p>
+      </div>
+      <div class="">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()">
+          <div>
+            <ion-select label="Airline" label-placement="floating" fill="outline" (ionChange)="onSelectAirline($event)">
+              <ion-select-option [value]="list.url" *ngFor="let list of airline">{{list.name}}</ion-select-option>
+            </ion-select>
+            <div *ngIf="isAirline">
+              <ion-input formControlName="email" type="email" class="fs-2 mb-1" label="Login Email"
+                         label-placement="floating" fill="outline"></ion-input>
+              <div
+                *ngIf=" loginForm.get('email').invalid && (loginForm.get('email').dirty || loginForm.get('email').touched)">
+                <span class="fs-1 text-danger" *ngIf="loginForm.get('email')?.errors.required">Email is required</span>
+                <!-- <span class="fs-12 text-danger" *ngIf="loginForm.get('email')?.errors.email">Invalid email
+                       format</span> -->
+              </div>
+              <ion-input formControlName="password" type="password" class="fs-2 mb-1" label="Password"
+                         label-placement="floating" fill="outline"></ion-input>
+              <div *ngIf="loginForm.get('password').invalid && (loginForm.get('password').dirty ||
+                  loginForm.get('password').touched)">
+              <span class="fs-1 text-danger" *ngIf="loginForm.get('password').errors?.required">Password is
+                required</span>
+              </div>
+            </div>
+          </div>
+          <!--           <div> -->
+          <!--             <span class="fs-1 text-danger">{{ isNotUser }}</span> -->
+          <!--           </div> -->
+          <div class="d-flex justify-content-between pt-2 pb-4">
+            <p class=" cursor-pointer me-2 fs-2" (click)="onHide(isAirline ? 'airBill' : '')"
+               [ngClass]="isAirline ? 'text-primary' : 'awb-block'">
+              Track Air Waybill
+            </p>
+            <!--             <p class="text-primary cursor-pointer ms-2 fs-2" (click)="onHide('forgot')"> -->
+            <!--               Forgot Password? -->
+            <!--             </p> -->
+          </div>
+          <div class="text-center" *ngIf="isAirline">
+            <button class="fs-2 btn" type="submit" [disabled]="loginForm.invalid">
+              Login
+              <ion-spinner *ngIf="isLoginLoader" class="btn-loader" name="lines-small"></ion-spinner>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search Air Waybill  -->
+  <div *ngIf="isSearchAirBill" class="lopd00">
+    <div class="lopd01 p-4">
+      <div>
+        <div class="mb-4">
+          <span (click)="onHide('login')" class="py-2"><i class="fa-solid fa-arrow-left-long fa-lg pe-3"></i></span>
+          <span class="fs-3 fw-bold mt-2">Search Air Waybill</span>
+        </div>
+        <div>
+          <form [formGroup]="airBillForm" (ngSubmit)="getTrackData()">
+            <div>
+              <ion-input type="Number" class="fs-2" label="IATA Number" label-placement="floating" fill="outline"
+                         formControlName="iata_number"></ion-input>
+              <ion-input type="Number" class="fs-2 mb-1" label="Air Waybill Number" label-placement="floating"
+                         fill="outline" formControlName="airBill_number"></ion-input>
+              <span *ngIf="isErr" class="fs-1 text-danger">Please Enter IATA Number & Air Waybill Number</span>
+            </div>
+            <div class="text-start">
+              <button class="btn fs-2 mt-3" type="submit">
+                Search
+                <ion-spinner *ngIf="isSearchLoader" class="btn-loader" name="lines-small"></ion-spinner>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="lopd00 overflow-scroll" *ngIf="isTrackingStatus">
+    <div class="lopd01 p-4">
+      <p class="fs-3 fw-bold">
+        <span (click)="onHide('airBill')" class="py-2"><i class="fa-solid fa-arrow-left-long fa-lg pe-3"></i></span>
+        Tracking Information
+      </p>
+      <div class="mt-3">
+        <p class="fs-2 fw-bold">Booking and Acceptance Information</p>
+        <div *ngIf="bookAcceptData.length" class="mt-3">
+          <div class="mt-2">
+            <table class="table responsive w-100">
+              <tbody>
+              <tr *ngFor="let item of bookAcceptData">
+                <td *ngIf="item.station" data-label="station">
+                  {{ item.station }}
+                </td>
+                <td *ngIf="item.airwaybillStatus" data-label="Milestone">
+                  {{ item.airwaybillStatus }}
+                </td>
+                <td *ngIf="item.pieces" data-label="Pieces">
+                  {{ item.pieces }}
+                </td>
+                <td *ngIf="item.flightNo" data-label="Flight NO">
+                  {{ item.flightNo }}
+                </td>
+                <td *ngIf="item.eventDate" data-label="Event Date">
+                  {{ item.eventDate }}
+                </td>
+                <td style="height: 3px; background-color: #ddd; margin: 0"></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="trackingData.length" class="mt-3">
+        <p class="fs-2 fw-bold">Status History</p>
+        <div class="mt-2">
+          <table class="table responsive w-100">
+            <tbody>
+            <tr *ngFor="let item of trackingData; index as i">
+              <td *ngIf="item.station" data-label="station">
+                {{ item.station }}
+              </td>
+              <td *ngIf="item.airwaybillStatus" data-label="Milestone">
+                {{ item.airwaybillStatus }}
+              </td>
+              <td *ngIf="item.pieces" data-label="Pieces">
+                {{ item.pieces }}
+              </td>
+              <td *ngIf="item.flightNo" data-label="Flight NO">
+                {{ item.flightNo }}
+              </td>
+              <td *ngIf="item.destination" data-label="Destination">
+                {{ item.destination }}
+              </td>
+              <td *ngIf="item.containerName" data-label="ULD">
+                {{ item.containerName }}
+              </td>
+              <td *ngIf="item.eventDate" data-label="Event Date">
+                {{ item.eventDate }}
+              </td>
+              <td style="height: 3px; background-color: #ddd; margin: 0"></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Search Air Waybill  -->
+
+  <!-- forget password -->
+  <div class="lod00" *ngIf="isForgotPassword">
+    <div class="lod01 p-4">
+      <span class="float-end" (click)="onHide('login')"><i class="fa-solid fa-xmark fa-xl"></i></span>
+      <div class="text-center mb-4">
+        <img src="./assets/proverne_logo.png" alt="login"/>
+        <p class="fs-3 mt-3">Forgot Password</p>
+      </div>
+      <div class="">
+        <form>
+          <div>
+            <ion-input type="email" class="fs-2" label="Enter your email" label-placement="floating"
+                       fill="outline"></ion-input>
+          </div>
+          <div class="text-center">
+            <button class="fs-2 btn me-2" type="submit">Submit</button>
+            <!-- <button class="fs-2 btn ms-2" type="submit">Cancel</button> -->
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- forget password -->
+</main>

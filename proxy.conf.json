@@ -1,0 +1,10 @@
+{
+    "/api": {
+        "target": "http://localtest.proverne.com:8080/cargo",
+        "secure": false,
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/services": ""
+        }
+    }
+}

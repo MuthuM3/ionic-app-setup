@@ -1,0 +1,40 @@
+<div *ngIf="isOriginList || isDestiniList">
+  <div class="position-relative">
+    <ion-list class="sl01">
+      <ion-item *ngFor="let result of flightData">
+        <ion-label *ngIf="isOriginList" class="fs-2 f-color"
+          (click)="onSelect(result.origin, result.originName, 'origin')">
+          {{ result.origin }} - ({{ result.originName}})
+        </ion-label>
+        <ion-label *ngIf="isDestiniList" class="fs-2 f-color" (click)="
+            onSelect(result.destination, result.destinationName, 'destination')
+          ">{{ result.destination }} - ({{ result.destinationName }})
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</div>
+
+<div *ngIf="isAirline">
+  <div class="position-relative">
+    <ion-list class="sl01">
+      <ion-item *ngFor="let list of airline">
+        <ion-label (click)="onSelectAirline(list.name, list.url)">{{list.name}}</ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</div>
+
+<!-- <div *ngIf="isList">
+  <div class="position-relative">
+    <ion-list class="sl01">
+      <ion-item *ngFor="let result of originCode">
+        <ion-label
+          class="fs-2"
+          (click)="onSelect(result.origin, result.originName)"
+          >{{ result.origin }} - ({{ result.originName }})</ion-label
+        >
+      </ion-item>
+    </ion-list>
+  </div>
+</div> -->

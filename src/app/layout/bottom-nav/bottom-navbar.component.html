@@ -1,0 +1,149 @@
+<div class="">
+   <div class="d-flex justify-content-around text-center fixed-bottom bnpd01 pt-2 pb-1">
+      <div (click)="setOpen(true)">
+         <i class="fa-solid fa-file-contract fa-xl my-2"></i><br>
+         <span class="fs-1">Air Waybill</span>
+      </div>
+      <div>
+         <i class="fa-solid fa-truck-plane fa-xl my-2"></i><br>
+         <span class="fs-1">Flight Operation</span>
+      </div>
+      <div class="d-none">
+         <i class="fa-solid fa-file-invoice fa-xl my-2"></i><br>
+         <span class="fs-1">Reports</span>
+      </div>
+      <div id="main-content" (click)="openEndMenu()">
+         <i class="fa-solid fa-layer-group fa-xl my-2"></i> <br>
+         <span class="fs-1">More</span>
+      </div>
+   </div>
+</div>
+
+<!-- ion Menu -->
+
+<ion-menu contentId="main-content" side="end">
+   <div>
+      <div class="tnpd01 p-3">
+         <span (click)="setOpen(false)" class="py-2"><i class="fa-solid fa-xmark fa-xl pe-2"></i></span>
+         <span class="fs-3 fw-bold mt-2">Menu</span>
+      </div>
+      <div class="px-3">
+         <ion-grid class="mt-3 ms-4">
+            <ion-row class="py-2 my-2">
+               <ion-col class="me-2 text-center" size="1"><i class="fa-solid fa-arrow-trend-up fa-lg"></i></ion-col>
+               <ion-col size="auto" class="ms-3 fs-2">Sales</ion-col>
+            </ion-row>
+            <ion-row class="py-2 my-2">
+               <ion-col class="me-2 text-center" size="1"><i class="fa-solid fa-dollar-sign fa-lg"></i></ion-col>
+               <ion-col size="auto" class="ms-3 fs-2">Rate Manager</ion-col>
+            </ion-row>
+            <ion-row class="py-2 my-2">
+               <ion-col class="me-2 text-center" size="1"><i
+                     class="fa-solid fa-file-invoice-dollar fa-lg"></i></ion-col>
+               <ion-col size="auto" class="ms-3 fs-2">Finance</ion-col>
+            </ion-row>
+            <ion-row class="py-2 my-2">
+               <ion-col class="me-2 text-center" size="1"><i class="fa-solid fa-user fa-lg"></i></ion-col>
+               <ion-col size="auto" class="ms-3 fs-2">System</ion-col>
+            </ion-row>
+            <ion-row class="py-2 my-2">
+               <ion-col class="me-2 text-center" size="1"><i class="fa-solid fa-bars-progress fa-lg"></i></ion-col>
+               <ion-col size="auto" class="ms-3 fs-2">ULD Management</ion-col>
+            </ion-row>
+            <ion-row class="py-2 my-2">
+               <ion-col class="me-2 text-center" size="1"><i class="fa-regular fa-money-bill-1 fa-lg"></i></ion-col>
+               <ion-col size="auto" class="ms-3 fs-2">CRM</ion-col>
+            </ion-row>
+         </ion-grid>
+      </div>
+   </div>
+</ion-menu>
+<!-- ion Menu -->
+
+<!-- Bottom Navbar Menu -->
+<ion-modal [isOpen]="isMoreMenu">
+   <ng-template>
+      <div class="p-3">
+         <div class="">
+            <span (click)="setOpen(false)" class="py-2"><i class="fa-solid fa-xmark fa-xl pe-2"></i></span>
+            <span class="fs-3 fw-bold mt-2">Menu</span>
+         </div>
+         <ion-grid class="mt-3 ms-4">
+            <ion-row class="py-2 my-2">
+               <ion-col class="me-2 text-center" size="1"><i class="fa-solid fa-arrow-trend-up fa-xl"></i></ion-col>
+               <ion-col size="auto">Sales</ion-col>
+            </ion-row>
+            <ion-row class="py-2 my-2">
+               <ion-col class="me-2 text-center" size="1"><i class="fa-solid fa-dollar-sign fa-xl"></i></ion-col>
+               <ion-col size="auto">Rate Manager</ion-col>
+            </ion-row>
+            <ion-row class="py-2 my-2">
+               <ion-col class="me-2 text-center" size="1"><i
+                     class="fa-solid fa-file-invoice-dollar fa-xl"></i></ion-col>
+               <ion-col size="auto">Finance</ion-col>
+            </ion-row>
+            <ion-row class="py-2 my-2">
+               <ion-col class="me-2 text-center" size="1"><i class="fa-solid fa-user fa-xl"></i></ion-col>
+               <ion-col size="auto">System</ion-col>
+            </ion-row>
+            <ion-row class="py-2 my-2">
+               <ion-col class="me-2 text-center" size="1"><i class="fa-solid fa-bars-progress fa-xl"></i></ion-col>
+               <ion-col size="auto">ULD Management</ion-col>
+            </ion-row>
+            <ion-row class="py-2 my-2">
+               <ion-col class="me-2 text-center" size="1"><i class="fa-regular fa-money-bill-1 fa-xl"></i></ion-col>
+               <ion-col size="auto">CRM</ion-col>
+            </ion-row>
+         </ion-grid>
+      </div>
+   </ng-template>
+</ion-modal>
+<!-- Bottom Navbar Menu -->
+
+<!-- Bottom Navbar Menu -->
+
+<ion-modal [isOpen]="isAirBillMenu">
+   <ng-template>
+      <div class="p-3 tnpd01">
+         <div class="" (click)="setOpen(false)">
+            <span class="py-2"><i class="fa-solid fa-xmark fa-xl pe-2"></i></span>
+            <span class="fs-3 fw-bold mt-2">Air Waybill</span>
+         </div>
+      </div>
+      <ion-grid class="py-2 px-3 ms-4">
+         <div>
+            <ion-row (click)="onExpand()">
+               <ion-col class="pe-2 pt-2 my-1" size="auto">
+                  <span *ngIf="isPlus"><i class="fa-solid fa-plus"></i></span>
+                  <span *ngIf="isMinus"><i class="fa-solid fa-minus"></i></span>
+               </ion-col>
+               <ion-col class="fs-2 pt-2 my-1" size="11">Air Waybill</ion-col>
+            </ion-row>
+            <div *ngIf="isChild">
+               <ion-row class="ms-4">
+                  <ion-col (click)="toRedirect('openairwaybill')" class="fs-1 py-2" size="12">Manage Air
+                     Waybills</ion-col>
+                  <ion-col class="fs-1 py-2" size="12">Air Waybill Tracking</ion-col>
+               </ion-row>
+            </div>
+         </div>
+         <!-- <div>
+            <ion-row (click)="onExpand()">
+               <ion-col class="pe-2 pt-2 my-1" size="auto">
+                  <span *ngIf="isPlus"><i class="fa-solid fa-plus"></i></span>
+                  <span *ngIf="isMinus"><i class="fa-solid fa-minus"></i></span>
+               </ion-col>
+               <ion-col class="fs-2 pt-2 my-1" size="11">Air Waybill</ion-col>
+            </ion-row>
+            <div *ngIf="isChild">
+               <ion-row class="ms-4">
+                  <ion-col class="fs-1 py-2" size="12">Manage Air Waybills</ion-col>
+                  <ion-col class="fs-1 py-2" size="12">Air Waybill Tracking</ion-col>
+               </ion-row>
+            </div>
+         </div> -->
+      </ion-grid>
+   </ng-template>
+</ion-modal>
+
+<!-- Bottom Navbar Menu -->

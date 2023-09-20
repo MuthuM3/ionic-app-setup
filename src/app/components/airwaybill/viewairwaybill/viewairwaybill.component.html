@@ -1,0 +1,141 @@
+<div>
+  <app-top-navbar [title]="title"></app-top-navbar>
+</div>
+
+<main>
+  <div class="m-3">
+    <div class="bg-white p-3 rounded">
+      <div>
+        <h1 class="fs-3 fw-bold mt-1">Search and filter</h1>
+        <form (ngSubmit)="onSubmit()" autocomplete="off">
+          <div>
+            <ion-input
+              [formControl]="awbNo"
+              type="text"
+              class="fs-2"
+              label="Air Waybill Number"
+              autocomplete="off"
+              label-placement="floating"
+              fill="outline"
+            ></ion-input>
+
+            <div class="d-flex align-items-center justify-content-between">
+              <p class="fs-2 me-2 text-nowrap">Range issue date From:</p>
+              <app-datepicker
+                [showfield]="'issueDateFrom'"
+                [issueDateFrom]="issueDateFrom"
+                (datePic)="selectDate($event)"
+              ></app-datepicker>
+            </div>
+            <div class="d-flex align-items-center justify-content-between mt-3">
+              <p class="fs-2 me-2 text-nowrap">Range issue date to:</p>
+              <app-datepicker
+                [showfield]="'issueDateTo'"
+                [issueDateTo]="issueDateTo"
+                (datePic)="selectDate($event)"
+              ></app-datepicker>
+            </div>
+            <div *ngIf="isOpen">
+              <div>
+                <ion-input
+                  type="search"
+                  class="fs-2 mb-1"
+                  label="Origin"
+                  autocomplete="off"
+                  label-placement="floating"
+                  fill="outline"
+                  (ionInput)="handleInput($event)"
+                  [value]="originVal"
+                ></ion-input>
+                <app-dropdown
+                  [flightData]="flightData"
+                  (dropDownEmit)="selectDropDown($event)"
+                  [isOriginList]="isOriginList"
+                ></app-dropdown>
+              </div>
+              <div class="">
+                <ion-input
+                  type="search"
+                  class="fs-2 mb-1"
+                  label="Destination"
+                  autocomplete="off"
+                  label-placement="floating"
+                  fill="outline"
+                  (ionInput)="handleInput($event)"
+                  [value]="destinationVal"
+                ></ion-input>
+                <app-dropdown
+                  [flightData]="flightData"
+                  [isDestiniList]="isDestiniList"
+                  (dropDownEmit)="selectDropDown($event)"
+                ></app-dropdown>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-3">
+              <button class="fs-2 btn" type="submit">Search Air Waybill</button>
+              <p class="fs-2" (click)="isOpen = !isOpen">
+                <span class="text-primary" *ngIf="!isOpen">+ more search</span>
+                <span class="text-primary" *ngIf="isOpen">- less search</span>
+              </p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="m-3">
+    <div class="bg-white p-3 rounded">
+      <div>
+        <h1 class="fs-3 fw-bold mt-1">Search and filter</h1>
+        <table class="table responsive w-100">
+          <tbody>
+            <tr *ngFor="let item of searchAirWayBill; index as i">
+              <td
+                *ngIf="item.airlineIATA"
+                data-label="Air Waybill
+              "
+              >
+                {{ item.airlineIATA.toString().padStart(3, "0") }}-{{
+                  item.awbNo.toString().padStart(8, "0")
+                }}
+              </td>
+              <td *ngIf="item.dateIssued" data-label="Created">
+                {{ item.dateIssued | date : "dd mm yyy" }}
+              </td>
+              <td *ngIf="item.shipperName" data-label="Shipper">
+                {{ item.shipperName }}
+              </td>
+              <td
+                *ngIf="item.origin"
+                data-label="O&D
+              "
+              >
+                {{ item.origin }}-{{ item.destination }}
+              </td>
+              <td *ngIf="item.status" data-label="Status">
+                {{ item.status }}
+              </td>
+              <td *ngIf="item.grossWeightKg" data-label="Weight">
+                {{ item.grossWeightKg }}
+              </td>
+              <td *ngIf="item.noOfPieces" data-label="Pieces">
+                {{ item.noOfPieces }}
+              </td>
+              <td *ngIf="item.commodityGroup" data-label="Comm/Svc">
+                {{ item.commodityGroup }}/{{ item.serviceCode }}
+              </td>
+              <td *ngIf="item.issuedBy" data-label="User">
+                {{ item.issuedBy }}
+              </td>
+              <td style="height: 3px; background-color: #ddd; margin: 0"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- modal -->
+
+<!-- modal -->

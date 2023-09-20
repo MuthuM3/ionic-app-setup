@@ -1,0 +1,26 @@
+{
+  "name": "cargo-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 3000,
+      "launchAutoHide": true,
+      "androidScaleType": "CENTER_CROP",
+      "splashImmersive": true,
+      "backgroundColor": "#ffffff"
+    }
+  },
+  "ssl": {
+    "key": "ssl/localhost.key",
+    "cert": "ssl/localhost.crt"
+  },
+  "proxies": [
+    {
+      "path": "/services",
+      "proxyUrl": "http://localtest.proverne.com:8080/cargo"
+    }
+  ]
+}

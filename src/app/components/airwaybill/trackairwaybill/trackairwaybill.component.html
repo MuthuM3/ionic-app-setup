@@ -1,0 +1,88 @@
+<div>
+   <app-top-navbar [title]="title"></app-top-navbar>
+</div>
+<!-- Search Air Waybill  -->
+<main>
+   <div class="m-3">
+      <div class="bg-white p-3 rounded">
+         <form [formGroup]="airBillForm" (ngSubmit)="getTrackData()">
+            <div class="d-flex">
+               <div class="w-100">
+                  <!-- <ion-input type="Number" class="fs-2" label="IATA Number" label-placement="floating" fill="outline"
+                    formControlName="iata_number"></ion-input> -->
+                  <ion-input class="fs-2 mb-1 mt-0" label="Air Waybill Number" label-placement="floating" fill="outline"
+                     formControlName="airBill_number"></ion-input>
+                  <span *ngIf="isErr" class="fs-1 text-danger">Please Enter Air Waybill
+                     Number</span>
+               </div>
+               <div class="text-start">
+                  <button class="btn fs-2 ms-2 text-nowrap" type="submit">
+                     Search <ion-spinner *ngIf="isLoader" class="btn-loader" name="lines-small"></ion-spinner>
+                  </button>
+               </div>
+            </div>
+         </form>
+      </div>
+   </div>
+   <div class="m-3" *ngIf="trackingData.length">
+      <div class="bg-white p-3">
+         <p class="fs-3 fw-bold">
+            <!-- <span class="py-2"><i class="fa-solid fa-arrow-left-long fa-lg pe-3"></i></span> -->
+            Tracking Information
+         </p>
+         <div class="mt-3">
+            <p class="fs-2 fw-bold">Booking and Acceptance Information</p>
+            <div *ngIf="bookAcceptData.length" class="mt-3">
+               <div class="mt-2">
+                  <table class="table responsive w-100">
+                     <tbody>
+                        <tr *ngFor="let item of bookAcceptData">
+                           <div *ngIf="item.status === 'DRAFT' || item.status === 'RECEIVED_FROM_SHIPPER'">
+                              <td *ngIf="item.status" data-label="Status">{{item.status}}</td>
+                              <td *ngIf="item.fltOrigin" data-label="Origin">{{item.fltOrigin}}</td>
+                              <td *ngIf="item.fltDestination" data-label="Destination">{{item.fltDestination}}</td>
+                              <td *ngIf="item.awbNoOfPieces" data-label="Pieces">{{item.awbNoOfPieces}}</td>
+                              <td *ngIf="item.awbGrossWeightKg" data-label="Weight">{{item.awbGrossWeightKg}}</td>
+                              <td *ngIf="item.flightNo" data-label="Flight NO">{{item.flightNo}}</td>
+                              <td *ngIf="item.flightDate" data-label="Flight Date">{{item.flightDate | date}}
+                              <td *ngIf="item.updatetime" data-label="Event Date">
+                                 {{item.updatetime | date: 'yyy-MM-dd, h:mm a'}}
+                              </td>
+                              <td style="height: 3px; background-color: #ddd; margin: 0;"></td>
+                           </div>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+         </div>
+         <div class="mt-3">
+            <p class="fs-2 fw-bold">Status History</p>
+            <div class="mt-2">
+               <table class="table responsive w-100">
+                  <tbody>
+                     <tr *ngFor="let item of trackingData">
+                        <div *ngIf="!(item.status === 'DRAFT' || item.status === 'RECEIVED_FROM_SHIPPER')">
+                           <td *ngIf="item.stationCode" data-label="Station">{{item.stationCode}}</td>
+                           <td *ngIf="item.status" data-label="Milestone">{{item.status}}</td>
+                           <td *ngIf="item.awbNoOfPieces" data-label="Pieces">{{item.awbNoOfPieces}}</td>
+                           <td *ngIf="item.awbGrossWeightKg" data-label="Weight">{{item.awbGrossWeightKg}}</td>
+                           <td *ngIf="item.flightNo" data-label="Flight NO">{{item.flightNo}}</td>
+                           <td *ngIf="item.flightDate" data-label="Flight Date">{{item.flightDate | date}}</td>
+                           <td *ngIf="item.fltOrigin" data-label="Origin">{{item.fltOrigin}}</td>
+                           <td *ngIf="item.fltDestination" data-label="Destination">{{item.fltDestination}}</td>
+                           <td *ngIf="item.uldSource" data-label="ULD">{{item.uldSource}}</td>
+                           <td *ngIf="item.updatetime" data-label="Event Date">
+                              {{item.updatetime | date: 'yyy-MM-dd, h:mm a'}}</td>
+                           <td style="height: 3px; background-color: #ddd; margin: 0;"></td>
+
+                        </div>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+   </div>
+</main>
+<!-- Search Air Waybill  -->
